@@ -10,30 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
-    create_table "songs", force: :cascade do |t|
-        t.string "title"
-        t.string "artist"
-        t.datetime "created_at", precision: 6, null: false
-        t.datetime "updated_at", precision: 6, null: false
-        t.string "song_image"
-        t.string "description"
-        t.string "artist"
-      end
-    
-      create_table "albums", force: :cascade do |t|
-        t.integer "user_id"
-        t.integer "song_id"
-        t.datetime "created_at", precision: 6, null: false
-        t.datetime "updated_at", precision: 6, null: false
-      end
-    
-      create_table "users", force: :cascade do |t|
-        t.string "name"
-        t.string "email"
-        t.datetime "created_at", precision: 6, null: false
-        t.datetime "updated_at", precision: 6, null: false
-      end
-    
-    end
-    
+ActiveRecord::Schema.define(version: 2023_06_07_181033) do
+
+  create_table "albums", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "song_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "song", force: :cascade do |t|
+    t.string "name"
+    t.string "artist"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+  end
+
+end
