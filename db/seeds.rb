@@ -1,5 +1,5 @@
+require 'uri'
 require 'net/http'
-require 'json'
 
 puts "Deleting old playlist..."
 
@@ -12,14 +12,20 @@ ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name = 
 ActiveRecord::Base.connection.execute("DELETE FROM sqlite_sequence WHERE name = 'song'")
 
 puts "Seeding ..."
-url = URI.parse("https://rapidapi.com/deezerdevs/api/deezer-1")
+
+
+url = URI("https://deezerdevs-deezer.p.rapidapi.com/genre/%7Bid%7D")
 
 http = Net::HTTP.new(url.host, url.port)
 http.use_ssl = true
 
-request = Net::HTTP::Get.new(url.request_uri)
+request = Net::HTTP::Get.new(url)
+request["X-RapidAPI-Key"] = '41112049c4msh59b5de37364f78ep1b8cc1jsna62ce0f490c3'
+request["X-RapidAPI-Host"] = 'deezerdevs-deezer.p.rapidapi.com'
 
 response = http.request(request)
+puts response.read_body
+
 
 if response.code == "200"
   data = JSON.parse(response.body)
