@@ -1,14 +1,26 @@
-require 'uri'
+require 'sinatra'
 require 'net/http'
+require 'json'
 
-url = URI("https://deezerdevs-deezer.p.rapidapi.com/search?q=eminem")
+get '/' do
+  erb :index
+end
 
-http = Net::HTTP.new(url.host, url.port)
-http.use_ssl = true
+post '/search' do
+  request_body = JSON.parse(request.body.read)
+  search_term = request_body['searchTerm']
 
-request = Net::HTTP::Get.new(url)
-request["X-RapidAPI-Key"] = '52cdfd2aa8msh3e4ac78fc021f31p1b238fjsnc431c9ac3507'
-request["X-RapidAPI-Host"] = 'deezerdevs-deezer.p.rapidapi.com'
+  url = URI("https://deezerdevs-deezer.p.rapidapi.com/search?q=#{search_term}")
 
-response = http.request(request)
-puts response.read_body
+  http = Net::HTTP.new(url.host, url.port)
+  http.use_ssl = true
+
+  request = Net::HTTP::Get.new(url)
+  request['X-RapidAPI-Key'] = 'YOUR_API_KEY'
+  request['X-RapidAPI-Host'] = 'deezerdevs-deezer.p.rapidapi.com'
+
+  response = http.request(request)
+  
+  content_type :json
+  response.body
+end
