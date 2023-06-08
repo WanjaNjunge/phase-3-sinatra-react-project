@@ -1,4 +1,4 @@
-class album ActiveRecord ::Base
+class Album < ActiveRecord::Base
     belongs_to :user
     belongs_to :song
 end

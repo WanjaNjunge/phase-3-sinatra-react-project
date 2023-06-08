@@ -23,6 +23,7 @@ GEM
     database_cleaner-core (2.0.1)
     diff-lcs (1.4.4)
     eventmachine (1.2.7)
+    excon (0.100.0)
     ffi (1.15.3)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
@@ -75,6 +76,8 @@ GEM
     sinatra-activerecord (2.0.23)
       activerecord (>= 4.1)
       sinatra (>= 1.0)
+    spotify-client (0.0.10)
+      excon (~> 0.37)
     sqlite3 (1.4.2)
     thin (1.8.1)
       daemons (~> 1.0, >= 1.0.9)
@@ -103,6 +106,7 @@ DEPENDENCIES
   rspec-json_expectations (~> 2.2)
   sinatra (~> 2.1)
   sinatra-activerecord (~> 2.0)
+  spotify-client
   sqlite3 (~> 1.4)
   thin (~> 1.8)
 
